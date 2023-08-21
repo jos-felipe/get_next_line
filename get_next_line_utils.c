@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:23:54 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/21 12:51:57 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:00:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char	*ft_strjoin(char *left_str, char *buff)
 
 	if (!left_str)
 	{
-		left_str = maloc(1);
+		left_str = malloc(1);
 		if (!left_str)
 			return (NULL);
 		left_str[0] = '\0';
 	}
-	str = malloc(str_len(left_str) + str_len(buff) + 1);
+	str = malloc(ft_strlen(left_str) + ft_strlen(buff) + 1);
 	if (!str)
 		return (NULL);
 	i = -1;
@@ -105,6 +105,7 @@ char	*ft_new_left_str(char *left_str)
 {
 	char	*str;
 	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (left_str[i] != '\n')
