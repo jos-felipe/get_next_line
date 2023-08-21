@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:23:54 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/17 14:50:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:51:57 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,102 +24,97 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+/// @brief find the first new line char
+/// @param s - the string to look inside
+/// @return the point to new line char
+char	*ft_strnwl(const char *s)
 {
 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	while (s[i] != '\0')
-	{
-		if (s[i] == (char) c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	return (0);
+	i = -1;
+	while (s[++i])
+		if (s[i] == '\n')
+			return (&s[i]);
+	return (NULL);
 }
 
+/// @brief join the str in buff after left_str
+/// @param left_str
+/// @param buff 
+/// @return a new string formed by buff joined to left_str
 char	*ft_strjoin(char *left_str, char *buff)
 {
+	char	*str;
 	size_t	i;
 	size_t	j;
-	char	*str;
 
 	if (!left_str)
 	{
-		left_str = (char *)malloc(1 * sizeof(char));
+		left_str = maloc(1);
+		if (!left_str)
+			return (NULL);
 		left_str[0] = '\0';
 	}
-	if (!left_str || !buff)
-		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
-	if (str == NULL)
-		return (NULL);
-	i = -1;
-	j = 0;
-	if (left_str)
-		while (left_str[++i] != '\0')
-			str[i] = left_str[i];
-	while (buff[j] != '\0')
-		str[i++] = buff[j++];
-	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
-	free(left_str);
-	return (str);
-}
-
-char	*ft_get_line(char *left_str)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	if (!left_str[i])
-		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = malloc(str_len(left_str) + str_len(buff) + 1);
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-	{
+	i = -1;
+	while (left_str[++i])
 		str[i] = left_str[i];
-		i++;
-	}
-	if (left_str[i] == '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
+	free(left_str);
+	j = 0;
+	while (buff[j])
+		str[i++] = buff[j++];
 	str[i] = '\0';
 	return (str);
 }
 
-char	*ft_new_left_str(char *left_str)
+/// @brief create a new str 
+/// @param left_str 
+/// @return a line
+char	*ft_get_line(char *left_str)
 {
-	int		i;
-	int		j;
-	char	*str;
+	char	*line;
+	size_t	i;
 
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (left_str[i] != '\n')
 		i++;
-	if (!left_str[i])
-	{
-		free(left_str);
+	line = malloc(i + 2);
+	if (!line)
 		return (NULL);
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
+	{
+		line[i] = left_str[i];
+		i++;
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	if (left_str[i] == '\n')
+	{
+		line[i] = left_str[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+/// @brief stores a new string result from subtratected line from left_str
+/// @param left_str 
+/// @return the new left_str
+char	*ft_new_left_str(char *left_str)
+{
+	char	*str;
+	size_t	i;
+
+	i = 0;
+	while (left_str[i] != '\n')
+		i++;
+	str = malloc(ft_strlen(left_str) - i + 1);
 	if (!str)
 		return (NULL);
-	i++;
 	j = 0;
 	while (left_str[i])
 		str[j++] = left_str[i++];
 	str[j] = '\0';
-	free(left_str);
 	return (str);
 }

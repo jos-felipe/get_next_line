@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:49:44 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/18 15:25:10 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:39:47 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+#define FILE_TO_READ "tests/evangelion.txt"
+#define LINES_TO_READ 10
+
 int	main(void)
 {
 	char	*line;
 	int		i;
-	int		fd1;
-	
-	fd1 = open("tests/evangelion.txt", O_RDONLY);
-	i = 1;
-	while (i < 15)
-	{
-		line = get_next_line(fd1);
-		printf("line [%02d]: %s", i, line);
-		free(line);
+	int		fd;
 
-		i++;
+	i = 0;
+	fd = open(FILE_TO_READ, O_RDONLY);
+	while (i++ <= LINES_TO_READ)
+	{
+		line = get_next_line(fd);
+		printf("line %i - %s", i, line);
+		free(line);
 	}
-	close(fd1);
+	close(fd);
 	return (0);
 }
