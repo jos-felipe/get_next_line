@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:23:54 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/21 16:00:15 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/22 12:29:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -24,13 +24,15 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-/// @brief find the first new line char
+/// @brief finds the first new line char
 /// @param s - the string to look inside
-/// @return the point to new line char
-char	*ft_strnwl(const char *s)
+/// @return the pointer to new line char
+char	*ft_strnwl(char *s)
 {
 	size_t	i;
 
+	if (!s)
+		return (NULL);
 	i = -1;
 	while (s[++i])
 		if (s[i] == '\n')
@@ -38,10 +40,10 @@ char	*ft_strnwl(const char *s)
 	return (NULL);
 }
 
-/// @brief join the str in buff after left_str
-/// @param left_str
-/// @param buff 
-/// @return a new string formed by buff joined to left_str
+/// @brief join the buff string to left_str
+/// @param left_str - first part of the new str
+/// @param buff - second part of the new str
+/// @return a new string = left_str + buff
 char	*ft_strjoin(char *left_str, char *buff)
 {
 	char	*str;
@@ -61,24 +63,24 @@ char	*ft_strjoin(char *left_str, char *buff)
 	i = -1;
 	while (left_str[++i])
 		str[i] = left_str[i];
-	free(left_str);
 	j = 0;
 	while (buff[j])
 		str[i++] = buff[j++];
 	str[i] = '\0';
+	free(left_str);
 	return (str);
 }
 
-/// @brief create a new str 
+/// @brief copy the chars of left_str until reach '\n' or EOF 
 /// @param left_str 
-/// @return a line
+/// @return a line with or without '\n'
 char	*ft_get_line(char *left_str)
 {
 	char	*line;
 	size_t	i;
 
 	i = 0;
-	while (left_str[i] != '\n')
+	while (left_str[i] && left_str[i] != '\n')
 		i++;
 	line = malloc(i + 2);
 	if (!line)
@@ -98,9 +100,9 @@ char	*ft_get_line(char *left_str)
 	return (line);
 }
 
-/// @brief stores a new string result from subtratected line from left_str
+/// @brief copy the chars after the line returned
 /// @param left_str 
-/// @return the new left_str
+/// @return left_str updated
 char	*ft_new_left_str(char *left_str)
 {
 	char	*str;
@@ -108,14 +110,21 @@ char	*ft_new_left_str(char *left_str)
 	size_t	j;
 
 	i = 0;
-	while (left_str[i] != '\n')
+	while (left_str[i] && left_str[i] != '\n')
 		i++;
+	if (!left_str[i])
+	{
+		free(left_str);
+		return (NULL);
+	}
 	str = malloc(ft_strlen(left_str) - i + 1);
 	if (!str)
 		return (NULL);
+	i++;
 	j = 0;
 	while (left_str[i])
 		str[j++] = left_str[i++];
 	str[j] = '\0';
+	free(left_str);
 	return (str);
 }

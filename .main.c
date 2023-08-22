@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:49:44 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/21 11:39:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:50:42 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-#define FILE_TO_READ "tests/evangelion.txt"
+#define FILE_TO_READ ".tests/evangelion.txt"
 #define LINES_TO_READ 10
 
 int	main(void)

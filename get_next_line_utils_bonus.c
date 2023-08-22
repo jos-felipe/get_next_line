@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 22:23:54 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/21 09:51:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/22 10:07:29 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ char	*ft_strjoin(char *left_str, char *buff)
 
 char	*ft_get_line(char *left_str)
 {
-	int		i;
 	char	*str;
+	int		i;
 
 	i = 0;
 	if (!left_str[i])
 		return (NULL);
 	while (left_str[i] && left_str[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = malloc(i + 2);
 	if (!str)
 		return (NULL);
 	i = 0;

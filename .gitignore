@@ -23,3 +23,6 @@
 # Tester files
 .gnlTester/
 
+# VSCode env files
+.vscode/
+
