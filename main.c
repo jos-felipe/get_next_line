@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:49:44 by josfelip          #+#    #+#             */
-/*   Updated: 2023/08/18 15:25:10 by josfelip         ###   ########.fr       */
+/*   Updated: 2023/08/29 12:32:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int	main(void)
 	
 	fd1 = open("tests/evangelion.txt", O_RDONLY);
 	i = 1;
-	while (i < 15)
+	while ((line = get_next_line(fd1)))
 	{
-		line = get_next_line(fd1);
 		printf("line [%02d]: %s", i, line);
 		free(line);
-
 		i++;
 	}
 	close(fd1);
