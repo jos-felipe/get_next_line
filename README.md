@@ -49,7 +49,7 @@ get_next_line.c get_next_line_utils.c -D BUFFER_SIZE=<size>
 
 ## 📋 Testing
 
-You only have to edit the .main.c file, test files are inside tests/, you can edit test files to put another text if you wish to test othe cases.
+You only have to edit the main.c file, test files are inside tests/, you can edit test files to put another text if you wish to test othe cases.
 Then simply run this command:
 
 ```shell
