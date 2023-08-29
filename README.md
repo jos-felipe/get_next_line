@@ -53,7 +53,7 @@ You only have to edit the .main.c file, test files are inside tests/, you can ed
 Then simply run this command:
 
 ```shell
-gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c .main.c && ./a.out
+gcc -Wall -Werror -Wextra -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c && ./a.out
 ```
 
 Or you can also use this third party tester to fully test the project
